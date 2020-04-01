@@ -95,7 +95,7 @@ in your terminal / CMD :
 $ git init
 $ heroku git:remote -a myapplication
 $ git add .
-$ commit -m "Initial commit"
+$ git commit -m "Initial commit"
 
 
 disable collect static by running

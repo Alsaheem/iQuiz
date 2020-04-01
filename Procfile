@@ -1,2 +1,2 @@
 release : python manage.py migrate
-web: gunicorn djHerokuAyoBoilerplate.wsgi --log-file -
+web: gunicorn iQuiz.wsgi --log-file -
