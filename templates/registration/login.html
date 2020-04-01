@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iQuiz | Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'iQuiz/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'iQuiz/css/login.css' %}">
+</head>
+
+<body>
+
+    <div class="main">
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="{% static 'iQuiz/img/signin-image.jpg' %}" alt="sing up image"></figure>
+                        
+                       <a href="{% url 'user:register' %}" class="signup-image-link">Create an account</a>
+                       
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign In</h2>
+
+                        {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+                        {% csrf_token %}
+                        <form class="form-horizontal" role="form" action="{% url 'user:login'%}" method="post" >
+                            {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="id_username">
+                                <i class="zmdi zmdi-account material-icons-name"></i>
+                                {% comment %} Username: {% endcomment %}
+                            </label>
+                            <div class="col-sm-10">
+                                <input id="id_username" maxlength="30" name="username" type="text" placeholder="username" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                                <label for="id_password">
+                                    <i class="zmdi zmdi-lock"></i>
+                                    {% comment %} Password: {% endcomment %}
+                                </label>
+                                <div class="col-sm-10">
+                                    <input id="id_password" maxlength="30" name="password" type="password" placeholder="Password" />
+                                </div>
+                            </div>
+
+
+                            
+                            <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
+                            <div class="form-group form-button">
+                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                </div>
+                            </div><a href="{% url 'password_reset' %}" class="signup-image-link">Forgot Password? Reset!</a>
+                        </div>
+                            
+
+                        </form>
+                    </div>
+                   
+                    </div><p style="padding: 0px 100px 0px 0px;"> <a href="{% url 'password_reset' %}" class="signup-image-link">Forgot Password? Reset!</a></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+
+    <script src="{% static 'iQuiz/js/jquery-1.12.1.min.js' %}"></script>
+    <script src="{% static 'iQuiz/js/login.js' %}"></script>
+    <script src="js/login.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+
+
+
+
+
+
+
+
+

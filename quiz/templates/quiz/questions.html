@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'iQuiz/assets/img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'iQuiz/assets/img/favicon.png' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        iQuiz
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="{% static 'iQuiz/css/bootstrap.min.css' %} " rel="stylesheet" />
+    <link href="{% static 'iQuiz/css/paper-dashboard.css' %} " rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'iQuiz/css/style.css' %} ">
+</head>
+
+<body class="">
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{% url 'quiz:home' %}"> <img src="{% static 'iQuiz/img/logo.png' %}" alt="logo"> </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center">
+                        <div class="breadcrumb_iner_item">
+                            <h2>{{subject.name}}</h2>
+                            <h3 class="text-white">Duration : {{subject.duration}}</h3>
+                            <div class="text-white">Time Left : <span id="time">25:00</span> minutes!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+
+    <br><br><br>
+
+    <!-- Question -->
+    <section>
+        <div class="container content">
+            <form action="{% url 'quiz:score' subject.slug %}" method="POST" >
+                {% for question in questions %}
+                {% csrf_token %}
+                <div class="row">
+                    <!-- EDIT PROFILE -->
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 ">
+                            
+                        <div class="card card-user">
+                            <div class="card-header">
+
+                                <h5 class="card-title text-center">Question {{ forloop.counter }}</h5>
+                                <h4 class="card-title text-center">{{question.question_text}} ?</h4>
+                            </div>
+                            <div class="card-body">
+                                <fieldset class="form-group ">
+                                    {% for answer in question.answer_set.all %}
+                                    <div class="row text-center justify-content-center">
+                                        <div class="col-md-6 form-group">
+                                            <input type="radio" class="form-check-input" name="{{question}}" id="answer{{ forloop.counter }}" value="{{answer.id }}">
+                                            <label for="answer{{ forloop.counter }}">{{ answer.answer_choice }}</label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </fieldset>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="row text-center">
+                            <div class="update ml-auto mr-auto">
+                                <button type="submit" class="btn btn-primary btn-round" id="submit-btn"
+                                    >Submit</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2"></div>
+                    </div>
+                    
+            </form>
+        </div>
+
+    </section>
+
+
+    </div>
+    </div>
+<script>
+    function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer == 0) {
+            var submit = document.getElementById('submit-btn');
+            submit.click();
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var fiveMinutes = 60 * 25,
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+};
+
+</script>
+   <!--   Core JS Files   -->
+   <script src="{% static 'iQuiz/js/jquery-1.12.1.min.js' %} "></script>
+   <script src="{% static 'iQuiz/js/popper.min.js' %} "></script>
+   <script src="{% static 'iQuiz/js/bootstrap.min.js' %} "></script>
+   <script src="{% static 'iQuiz/assets/js/plugins/perfect-scrollbar.jquery.min.js' %} "></script>
+   <!--  Google Maps Plugin    -->
+   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+   <script src="{% static 'iQuiz/js/paper-dashboard.js' %} " type="text/javascript"></script>
+   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+   <script src="{% static 'iQuiz/assets/demo/demo.js' %} "></script>
+</body>
+
+</html>
