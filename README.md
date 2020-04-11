@@ -1,6 +1,6 @@
-this is a django web application for quiz with quiz timing functionality
+this is a django web application for a quiz app with Timer  functionality
 
-quiz functionality by Ayomide (codefreakie)
+quiz functionality by Ayomide (Alsaheem)
 frontend by itunu (codefreakie)
 auth by tofunmi (toffy21)
 
