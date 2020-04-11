@@ -59,13 +59,14 @@
     <section>
         <div class="container content">
             <form action="{% url 'quiz:score' subject.slug %}" method="POST" >
-                {% for question in questions %}
-                {% csrf_token %}
+
                 <div class="row">
+
                     <!-- EDIT PROFILE -->
                     <div class="col-md-2"></div>
                     <div class="col-md-8 ">
-                            
+                        {% for question in questions %}
+                {% csrf_token %}
                         <div class="card card-user">
                             <div class="card-header">
 
@@ -95,7 +96,7 @@
 
                         <div class="col-md-2"></div>
                     </div>
-                    
+
             </form>
         </div>
 
